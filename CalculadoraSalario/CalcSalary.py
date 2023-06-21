@@ -89,10 +89,10 @@ def calc():
 
     yearShow = Label(app, text=f"R${yearGet:,.2f}", width=28, height=1, anchor='w', font=(
         'Ivy 10'), relief=RAISED, bg=gray, fg=font)
-    yearShow.place(x=5, y=234)
+    yearShow.place(x=5, y=256)
 
 
-# Colocando imagem e botãao de calcular
+# Colocando imagem e botão de calcular
 iconBig = Image.open('calculadoraSalario/images/money.png')
 iconBig = iconBig.resize((100, 100))
 iconBig = ImageTk.PhotoImage(iconBig)
