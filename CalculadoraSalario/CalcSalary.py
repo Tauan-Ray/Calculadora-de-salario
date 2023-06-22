@@ -9,9 +9,9 @@ font = '#3e4146'
 # Configurando janela
 app = Tk()
 app.title('Calculadora de Salário')
-app.geometry('550x350')
+app.geometry('550x330')
 app.config(bg=white)
-#app.resizable(False, False)
+app.resizable(False, False)
 
 # Criando cabeçalho
 header = Frame(app, width=551, height=30, bg=white,
@@ -19,11 +19,21 @@ header = Frame(app, width=551, height=30, bg=white,
 header.place(x=0, y=0)
 
 
-# Fazendo header
+# Preparando imagens
 iconHeader = Image.open('CalculadoraSalario/images/money.png')
 iconHeader = iconHeader.resize((28, 28))
 iconHeader = ImageTk.PhotoImage(iconHeader)
 
+iconBig = Image.open('calculadoraSalario/images/money.png')
+iconBig = iconBig.resize((100, 100))
+iconBig = ImageTk.PhotoImage(iconBig)
+
+circle = Image.open('CalculadoraSalario/images/circles.png')
+circle = circle.resize((39, 100))
+circle = ImageTk.PhotoImage(circle)
+
+
+# Fazendo header
 iconHead = Label(header, image=iconHeader, width=20, height=23,
                  compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
 iconHead.place(x=4, y=0)
@@ -75,7 +85,6 @@ def calc():
     yearGet = float(yearEntry.get())
 
     hoursWeek = int(hoursGet * daysGet)
-    
 
     nameShow = Label(app, text=nameGet, width=28, height=1, anchor='w', font=(
         'Ivy 10'), relief=RAISED, bg=gray, fg=font)
@@ -90,32 +99,36 @@ def calc():
     daysShow.place(x=5, y=234)
 
     yearShow = Label(app, text=f"R${yearGet:,.2f}", width=28, height=1, anchor='w', font=(
-        'Ivy 10'), relief=RAISED, bg=gray, fg=font)
+        'Ivy 10 bold'), relief=RAISED, bg=gray, fg=font)
     yearShow.place(x=5, y=256)
 
     # Mostrando o salário anual, mensal, diário e por hora
-    circle = Image.open('CalculadoraSalario/images/circles.png')
-    circle = circle.resize((39,100))
-    circle = ImageTk.PhotoImage(circle)
-
     iconCircles = Label(app, image=circle, width=39, height=100,
-                    compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
+                        compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
     iconCircles.place(x=245, y=195)
 
-    salHour = Label(app, text=f'Salário por hora: R$ {yearGet/(hoursWeek*52):.2f}', width=25, height=1, anchor='w', font=(
-            'Arial 10'), bg=white, fg=font)
+    salHour = Label(app, text=f'Salário por hora: R$ {yearGet/(hoursWeek*52):,.2f}', width=25, height=1, anchor='w', font=(
+        'Arial 10'), bg=white, fg=font)
     salHour.place(x=290, y=190)
 
-    salDay = Label(app, text=f'Salário diário: R$ {yearGet/(daysGet*52):.2f}', width=25, height=1, anchor='w', font=(
-            'Arial 10'), bg=white, fg=font)
+    salDay = Label(app, text=f'Salário Diário: R$ {yearGet/(daysGet*52):,.2f}', width=25, height=1, anchor='w', font=(
+        'Arial 10'), bg=white, fg=font)
     salDay.place(x=290, y=212)
+
+    salWeek = Label(app, text=f'Salário Semanal: R$ {yearGet/52:,.2f}', width=25, height=1, anchor='w', font=(
+        'Arial 10'), bg=white, fg=font)
+    salWeek.place(x=290, y=234)
+
+    salMonth = Label(app, text=f'Salário Mensal: R$ {yearGet/12:,.2f}', width=25, height=1, anchor='w', font=(
+        'Arial 10'), bg=white, fg=font)
+    salMonth.place(x=290, y=256)
+
+    salYear = Label(app, text=f'Salário Anual: R$ {yearGet:,.2f}', width=25, height=1, anchor='w', font=(
+        'Arial 10'), bg=white, fg=font)
+    salYear.place(x=290, y=278)
 
 
 # Colocando imagem e botão de calcular
-iconBig = Image.open('calculadoraSalario/images/money.png')
-iconBig = iconBig.resize((100, 100))
-iconBig = ImageTk.PhotoImage(iconBig)
-
 img = Label(app, image=iconBig, width=114, height=100,
             compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
 img.place(x=380, y=40)
