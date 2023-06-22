@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from tkinter import messagebox
 
 # Cores
 white = '#FFFFFF'
@@ -78,54 +79,61 @@ yearEntry.place(x=246, y=155)
 
 # Criando função
 def calc():
-    # Coletando informações dos entrys
-    nameGet = nameEntry.get()
-    hoursGet = int(hoursEntry.get())
-    daysGet = int(daysEntry.get())
-    yearGet = float(yearEntry.get())
+    try:
+        # Coletando informações dos entrys
+        nameGet = nameEntry.get()
+        hoursGet = int(hoursEntry.get())
+        daysGet = int(daysEntry.get())
+        yearGet = float(yearEntry.get())
+        hoursWeek = int(hoursGet * daysGet)
 
-    hoursWeek = int(hoursGet * daysGet)
+        if nameGet == '':
+            messagebox.showinfo('Atenção!!!',
+                                'Preencha o campo de nome.')
+        else:
+            nameShow = Label(app, text=nameGet, width=28, height=1, anchor='w', font=(
+                'Ivy 10'), relief=RAISED, bg=gray, fg=font)
+            nameShow.place(x=5, y=190)
 
-    nameShow = Label(app, text=nameGet, width=28, height=1, anchor='w', font=(
-        'Ivy 10'), relief=RAISED, bg=gray, fg=font)
-    nameShow.place(x=5, y=190)
+            hoursShow = Label(app, text=f'Horas de trabalho por dia: {hoursGet}', width=28, height=1, anchor='w', font=(
+                'Ivy 10'), relief=RAISED, bg=gray, fg=font)
+            hoursShow.place(x=5, y=212)
 
-    hoursShow = Label(app, text=f'Horas de trabalho por dia: {hoursGet}', width=28, height=1, anchor='w', font=(
-        'Ivy 10'), relief=RAISED, bg=gray, fg=font)
-    hoursShow.place(x=5, y=212)
+            daysShow = Label(app, text=f'Dias de trabalho por semana: {daysGet}', width=28, height=1, anchor='w', font=(
+                'Ivy 10'), relief=RAISED, bg=gray, fg=font)
+            daysShow.place(x=5, y=234)
 
-    daysShow = Label(app, text=f'Dias de trabalho por semana: {daysGet}', width=28, height=1, anchor='w', font=(
-        'Ivy 10'), relief=RAISED, bg=gray, fg=font)
-    daysShow.place(x=5, y=234)
+            yearShow = Label(app, text=f"R${yearGet:,.2f}", width=28, height=1, anchor='w', font=(
+                'Ivy 10 bold'), relief=RAISED, bg=gray, fg=font)
+            yearShow.place(x=5, y=256)
 
-    yearShow = Label(app, text=f"R${yearGet:,.2f}", width=28, height=1, anchor='w', font=(
-        'Ivy 10 bold'), relief=RAISED, bg=gray, fg=font)
-    yearShow.place(x=5, y=256)
+            # Mostrando o salário anual, mensal, diário e por hora
+            iconCircles = Label(app, image=circle, width=39, height=100,
+                                compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
+            iconCircles.place(x=245, y=195)
 
-    # Mostrando o salário anual, mensal, diário e por hora
-    iconCircles = Label(app, image=circle, width=39, height=100,
-                        compound=CENTER, anchor=CENTER, bg=white, relief=FLAT)
-    iconCircles.place(x=245, y=195)
+            salHour = Label(app, text=f'Salário por hora: R$ {yearGet/(hoursWeek*52):,.2f}', width=25, height=1, anchor='w', font=(
+                'Arial 10'), bg=white, fg=font)
+            salHour.place(x=290, y=190)
 
-    salHour = Label(app, text=f'Salário por hora: R$ {yearGet/(hoursWeek*52):,.2f}', width=25, height=1, anchor='w', font=(
-        'Arial 10'), bg=white, fg=font)
-    salHour.place(x=290, y=190)
+            salDay = Label(app, text=f'Salário Diário: R$ {yearGet/(daysGet*52):,.2f}', width=25, height=1, anchor='w', font=(
+                'Arial 10'), bg=white, fg=font)
+            salDay.place(x=290, y=212)
 
-    salDay = Label(app, text=f'Salário Diário: R$ {yearGet/(daysGet*52):,.2f}', width=25, height=1, anchor='w', font=(
-        'Arial 10'), bg=white, fg=font)
-    salDay.place(x=290, y=212)
+            salWeek = Label(app, text=f'Salário Semanal: R$ {yearGet/52:,.2f}', width=25, height=1, anchor='w', font=(
+                'Arial 10'), bg=white, fg=font)
+            salWeek.place(x=290, y=234)
 
-    salWeek = Label(app, text=f'Salário Semanal: R$ {yearGet/52:,.2f}', width=25, height=1, anchor='w', font=(
-        'Arial 10'), bg=white, fg=font)
-    salWeek.place(x=290, y=234)
+            salMonth = Label(app, text=f'Salário Mensal: R$ {yearGet/12:,.2f}', width=25, height=1, anchor='w', font=(
+                'Arial 10'), bg=white, fg=font)
+            salMonth.place(x=290, y=256)
 
-    salMonth = Label(app, text=f'Salário Mensal: R$ {yearGet/12:,.2f}', width=25, height=1, anchor='w', font=(
-        'Arial 10'), bg=white, fg=font)
-    salMonth.place(x=290, y=256)
-
-    salYear = Label(app, text=f'Salário Anual: R$ {yearGet:,.2f}', width=25, height=1, anchor='w', font=(
-        'Arial 10'), bg=white, fg=font)
-    salYear.place(x=290, y=278)
+            salYear = Label(app, text=f'Salário Anual: R$ {yearGet:,.2f}', width=25, height=1, anchor='w', font=(
+                'Arial 10'), bg=white, fg=font)
+            salYear.place(x=290, y=278)
+    except:
+        messagebox.showerror('Erro!!!',
+                              'Insira números')
 
 
 # Colocando imagem e botão de calcular
